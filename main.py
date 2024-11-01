@@ -1,9 +1,9 @@
 import os
 import uvicorn
 from fastapi import FastAPI
-from app.core.config import config
-from app.db.mongodb import connect_db, close_db
-from app.api.v1.auth import auth_router
+from core.config import config
+from db.mongodb import connect_db, close_db
+from api.v1.auth import auth_router
 
 
 app =FastAPI()
@@ -31,8 +31,8 @@ def main(env: str, debug:bool):
         host= config.APP_HOST,
         port= config.APP_PORT,
         reload= True if config.ENV != "production" else False,
-        worker=2
     )
 
-if __name__ == "__name__":
-    main()
+
+if __name__ == "__main__":
+    main(config.ENV, config.DEBUG)
